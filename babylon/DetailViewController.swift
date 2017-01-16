@@ -29,19 +29,23 @@ class DetailViewController: UIViewController {
         self.openCommentsButton.layer.cornerRadius = 22.0
         self.openCommentsButton.layer.zPosition = 1
         self.openCommentsButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        self.openCommentsButton.layer.shadowOpacity = 0.6
+        self.openCommentsButton.layer.shadowRadius = 0.8
+        
         self.descriptionLabel.textColor = Color.materialDarkText.primary
         self.numberOfCommentsLabel.textColor = Color.materialLightText.primary
         
         self.fillData()
     }
     
-    //MARK: - Custom Accessors
+    //MARK: - Actions
     func fillData() {
         self.title = userFullName
         self.descriptionLabel.attributedText = self.justifyLabelText(text: postDescription.capitalized)
         self.numberOfCommentsLabel.text = numberOfComments
     }
     
+    //MARK: - Custom Accessors
     func justifyLabelText(text: String) -> NSAttributedString {
         let style = NSMutableParagraphStyle()
         style.alignment = .justified
