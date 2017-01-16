@@ -9,7 +9,10 @@
 import XCTest
 
 class babylonUITests: XCTestCase {
-        
+    
+    let app = XCUIApplication()
+    let tablesQuery = XCUIApplication().tables
+    
     override func setUp() {
         super.setUp()
         
@@ -31,6 +34,21 @@ class babylonUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let count = tablesQuery.cells.count
+        XCTAssert(count > 0)
+        
+        let predicate = NSPredicate(format: "exists == 1")
+        
+        let firstCell = tablesQuery.cells.element(boundBy: 0)
+        expectation(for: predicate, evaluatedWith: firstCell, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
+        firstCell.tap()
+        
+        let navBar = app.navigationBars.element(boundBy: 0)
+        expectation(for: predicate, evaluatedWith: navBar, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
+        
+        XCTAssertEqual(navBar.identifier, "Leanne Graham")
     }
     
 }
